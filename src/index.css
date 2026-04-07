@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SF Pro Display — Apple's system font, loaded as webfont for cross-platform consistency */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://cdn.jsdelivr.net/npm/sf-pro@1.0.4/font/woff2/sf-pro-display_regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://cdn.jsdelivr.net/npm/sf-pro@1.0.4/font/woff2/sf-pro-display_medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://cdn.jsdelivr.net/npm/sf-pro@1.0.4/font/woff2/sf-pro-display_semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('https://cdn.jsdelivr.net/npm/sf-pro@1.0.4/font/woff2/sf-pro-display_bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 210 33% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 187 72% 53%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 14% 50%;
+
+    --accent: 187 72% 95%;
+    --accent-foreground: 187 72% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(187 72% 53%));
+    --gradient-hero: linear-gradient(160deg, hsl(210 33% 98%) 0%, hsl(217 91% 97%) 50%, hsl(187 72% 96%) 100%);
+    --gradient-chat: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 80% 55%));
+
+    --shadow-soft: 0 2px 15px -3px hsl(217 91% 60% / 0.08), 0 4px 6px -4px hsl(217 91% 60% / 0.05);
+    --shadow-card: 0 4px 25px -5px hsl(217 91% 60% / 0.1), 0 8px 10px -6px hsl(217 91% 60% / 0.05);
+    --shadow-chat: 0 10px 40px -10px hsl(217 91% 60% / 0.2);
+    --shadow-float: 0 20px 60px -15px hsl(217 91% 60% / 0.25);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  /* Apple squircle for square elements — SVG objectBoundingBox scales correctly only on squares */
+  .squircle {
+    clip-path: url(#squircle);
+  }
+  /* Squircle for rectangular elements — use inset() with absolute px for uniform corners */
+  .squircle-sm {
+    clip-path: inset(0 round 18px);
+  }
+
+  /* Drop shadows for squircle elements (box-shadow is clipped; use filter instead) */
+  .squircle-shadow-soft {
+    filter: drop-shadow(0 2px 15px hsl(217 91% 60% / 0.08)) drop-shadow(0 4px 6px hsl(217 91% 60% / 0.05));
+  }
+  .squircle-shadow-card {
+    filter: drop-shadow(0 4px 25px hsl(217 91% 60% / 0.1)) drop-shadow(0 8px 10px hsl(217 91% 60% / 0.05));
+    transition: filter 0.3s ease;
+  }
+  .squircle-shadow-card:hover {
+    filter: drop-shadow(0 20px 60px hsl(217 91% 60% / 0.25));
+  }
+  .squircle-shadow-float {
+    filter: drop-shadow(0 20px 60px hsl(217 91% 60% / 0.25));
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-chat {
+    background: var(--gradient-chat);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-chat {
+    box-shadow: var(--shadow-chat);
+  }
+  .shadow-float {
+    box-shadow: var(--shadow-float);
+  }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.4s ease-out forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes letter-reveal {
+  from { opacity: 0; transform: translateY(20px) skewY(3deg); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0)   skewY(0deg);  filter: blur(0); }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+.animate-letter-reveal {
+  animation: letter-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
