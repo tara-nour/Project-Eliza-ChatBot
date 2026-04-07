@@ -1,0 +1,84 @@
+{
+  "intents": [
+    {
+      "symptomes": ["mal de tête", "migraine", "céphalée"],
+      "questions": [
+        "Depuis combien de temps avez-vous mal ?",
+        "La douleur est-elle intense ou modérée ?",
+        "Avez-vous de la fièvre ou des troubles visuels ?"
+      ],
+      "orientation": "Médecin généraliste",
+      "urgence": false
+    },
+    {
+      "symptomes": ["douleur poitrine", "oppression thoracique", "coeur"],
+      "questions": [
+        "La douleur est-elle brutale ?",
+        "Avez-vous des difficultés à respirer ?",
+        "La douleur irradie-t-elle dans le bras ou la mâchoire ?"
+      ],
+      "orientation": "Urgences",
+      "urgence": true
+    },
+    {
+      "symptomes": ["douleur dent", "rage de dent", "gencive"],
+      "questions": [
+        "La douleur est-elle constante ou par intermittence ?",
+        "Y a-t-il un gonflement ?",
+        "Avez-vous de la fièvre ?"
+      ],
+      "orientation": "Dentiste",
+      "urgence": false
+    },
+    {
+      "symptomes": ["douleur ventre", "mal au ventre", "crampes abdominales"],
+      "questions": [
+        "Depuis quand avez-vous mal ?",
+        "Avez-vous des nausées ou vomissements ?",
+        "La douleur est-elle localisée ou diffuse ?"
+      ],
+      "orientation": "Médecin généraliste",
+      "urgence": false
+    },
+    {
+      "symptomes": ["fracture", "os cassé", "chute", "entorse grave"],
+      "questions": [
+        "Pouvez-vous bouger le membre ?",
+        "Y a-t-il une déformation visible ?",
+        "La douleur est-elle intense ?"
+      ],
+      "orientation": "Urgences",
+      "urgence": true
+    },
+    {
+      "symptomes": ["stress", "anxiété", "angoisse", "dépression"],
+      "questions": [
+        "Depuis combien de temps ressentez-vous cela ?",
+        "Avez-vous des troubles du sommeil ?",
+        "Cela impacte-t-il votre quotidien ?"
+      ],
+      "orientation": "Psychologue",
+      "urgence": false
+    },
+    {
+      "symptomes": ["problème peau", "boutons", "eczéma", "irritation"],
+      "questions": [
+        "Depuis quand avez-vous ces symptômes ?",
+        "Y a-t-il des démangeaisons ?",
+        "Avez-vous changé de produit récemment ?"
+      ],
+      "orientation": "Dermatologue",
+      "urgence": false
+    },
+    {
+      "symptomes": ["difficulté respirer", "essoufflement", "asthme"],
+      "questions": [
+        "Est-ce soudain ?",
+        "Avez-vous des antécédents respiratoires ?",
+        "Entendez-vous des sifflements ?"
+      ],
+      "orientation": "Urgences",
+      "urgence": true
+    }
+  ]
+}
