@@ -4,7 +4,7 @@ function detectIntent(message) {
     const msg = message.toLowerCase();
     if (bookKeywords.some(k => msg.includes(k))){
         return 'BOOK';
-    } else if(bookKeywords2.some(k => msg.includes(k))) {
+    } else if(cancelKeywords.some(k => msg.includes(k))) {
         return 'CANCEL';
     } else {
         return 'UNKNOWN';
