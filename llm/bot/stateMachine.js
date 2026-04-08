@@ -1,3 +1,4 @@
+import { detectIntent } from "./intentDetection";
 const sessions = new Map();
 
 function createFreshSession(){
