@@ -1,5 +1,6 @@
 import { ChatMessage } from "@/types/chat";
-import { findBestMatch } from "../../llm/rag";
+import { findBestMatch, findRelevantChunks } from "../../llm/rag";
+import { askMistral } from "../../llm/mistral";
 
 export async function mockBotReply(
   userMessage: string,
@@ -7,22 +8,29 @@ export async function mockBotReply(
 ): Promise<ChatMessage> {
   await new Promise((r) => setTimeout(r, 800 + Math.random() * 600));
 
-  const lower = userMessage.toLowerCase();
   let content: string;
   let quickReplies: string[] | undefined;
 
   const bestMatch = findBestMatch(userMessage);
+  const chunks = await findRelevantChunks(userMessage);
 
-  if (bestMatch) {
-    content = `Je comprends votre situation.
-    Orientation recommandée : ${bestMatch.orientation}.
-
-    Pour mieux vous aider :
-    - ${bestMatch.questions.join("\n- ")}`;
-    quickReplies = bestMatch.questions;
-  } else {
-    content = "Désolé, je n'ai pas compris. Pouvez-vous reformuler ou donner plus de détails ?";
+  try {
+    if (chunks.length > 0) {
+      const context = chunks.join("\n\n---\n\n");
+      content = await askMistral(userMessage, context);
+    } else {
+      content = "Désolé, je n'ai pas compris. Pouvez-vous reformuler ou donner plus de détails ?";
+    }
+  } catch (err: unknown) {
+    const status = (err as { statusCode?: number })?.statusCode;
+    if (status === 429) {
+      content = "Je suis un peu surchargé en ce moment, réessayez dans quelques secondes.";
+    } else {
+      content = "Une erreur est survenue, veuillez réessayer.";
+    }
   }
+
+  quickReplies = bestMatch?.questions;
 
   return {
     id: crypto.randomUUID(),
