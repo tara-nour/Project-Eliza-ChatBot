@@ -4,8 +4,7 @@ from discord import app_commands
 from dotenv import load_dotenv
 import os
 
-from commands.rdv import setup_rdv
-from commands.praticiens import setup_praticiens
+from rdv import setup_rdv
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -16,7 +15,7 @@ tree = app_commands.CommandTree(client)
 
 #Enregistrement des commandes 
 setup_rdv(tree)
-setup_praticiens(tree)
+
 
 
 #Commande /aide 
