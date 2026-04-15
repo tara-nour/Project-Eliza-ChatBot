@@ -30,7 +30,8 @@ ollama pull phi4-mini
 ollama pull nomic-embed-text
 ```
 
-> The project's model can be changed in `llm/model.ts`. `phi4-mini` is the default model.
+> The project's model can be changed in `llm/model.ts`. `phi4-mini` is the default model.<br>
+> If you want to use a model other than the default one, you must run Ollama with the corresponding model at the same time.
 
 ## Ingesting PDFs
 ```bash
