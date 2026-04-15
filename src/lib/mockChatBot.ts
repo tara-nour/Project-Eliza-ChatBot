@@ -4,23 +4,19 @@ import { askMistral } from "../../llm/mistral";
 
 export async function mockBotReply(
   userMessage: string,
-  _history: ChatMessage[]
+  history: ChatMessage[]
 ): Promise<ChatMessage> {
-  await new Promise((r) => setTimeout(r, 800 + Math.random() * 600));
-
   let content: string;
-  let quickReplies: string[] | undefined;
 
-  const bestMatch = findBestMatch(userMessage);
   const chunks = await findRelevantChunks(userMessage);
+  const context = chunks.length > 0 ? chunks.join("\n\n---\n\n") : undefined;
+
+  const llmHistory = history
+    .filter((m) => m.role === "user" || m.role === "assistant")
+    .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
 
   try {
-    if (chunks.length > 0) {
-      const context = chunks.join("\n\n---\n\n");
-      content = await askMistral(userMessage, context);
-    } else {
-      content = "Désolé, je n'ai pas compris. Pouvez-vous reformuler ou donner plus de détails ?";
-    }
+    content = await askMistral(userMessage, context, llmHistory);
   } catch (err: unknown) {
     const status = (err as { statusCode?: number })?.statusCode;
     if (status === 429) {
@@ -30,13 +26,13 @@ export async function mockBotReply(
     }
   }
 
-  quickReplies = bestMatch?.questions;
+  const bestMatch = findBestMatch(userMessage);
 
   return {
     id: crypto.randomUUID(),
     role: "assistant",
     content,
     timestamp: new Date(),
-    quickReplies,
+    quickReplies: bestMatch?.questions,
   };
 }

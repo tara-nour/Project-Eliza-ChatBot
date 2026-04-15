@@ -1,4 +1,5 @@
 import { SYS_PROMPT } from "./prompt";
+import { getPraticienContext } from "../src/data/praticiens";
 
 export async function embedText(text: string): Promise<number[]> {
   try {
@@ -20,13 +21,18 @@ export async function embedText(text: string): Promise<number[]> {
   }
 }
 
-export async function askMistral(input: string, context?: string): Promise<string> {
-  const systemContent = context
-    ? `${SYS_PROMPT}\n\nInformations médicales de référence :\n${context}`
-    : SYS_PROMPT;
+interface HistoryMessage {
+  role: "user" | "assistant";
+  content: string;
+}
 
-  const messages: { role: "system" | "user"; content: string }[] = [
+export async function askMistral(input: string, context?: string, history: HistoryMessage[] = []): Promise<string> {
+  const praticiens = getPraticienContext();
+  const systemContent = `${SYS_PROMPT}\n\nPraticiens disponibles :\n${praticiens}${context ? `\n\nInformations médicales de référence :\n${context}` : ""}`;
+
+  const messages: { role: "system" | "user" | "assistant"; content: string }[] = [
     { role: "system", content: systemContent },
+    ...history,
     { role: "user", content: input },
   ];
 
@@ -35,7 +41,8 @@ export async function askMistral(input: string, context?: string): Promise<strin
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gemma2:2b",
+        // model: "llama3.2:3b",
+        model: "phi4-mini",
         messages: messages,
         stream: false, 
       }),

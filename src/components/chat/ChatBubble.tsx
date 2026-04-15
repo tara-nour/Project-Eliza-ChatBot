@@ -1,5 +1,6 @@
 import { ChatMessage } from "@/types/chat";
 import { Bot, User } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 interface ChatBubbleProps {
   message: ChatMessage;
@@ -26,7 +27,13 @@ export function ChatBubble({ message, onQuickReply }: ChatBubbleProps) {
               : "gradient-chat text-primary-foreground rounded-tr-md"
           }`}
         >
-          {message.content}
+          {isBot ? (
+            <div className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
+          ) : (
+            message.content
+          )}
         </div>
         {message.quickReplies && message.quickReplies.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
