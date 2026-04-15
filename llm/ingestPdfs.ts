@@ -1,14 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { PDFParse } from "pdf-parse";
-import { Mistral } from "@mistralai/mistralai";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const mistral = new Mistral({
-  apiKey: process.env.MISTRAL_API_KEY || "",
-});
 
 const PDF_DIR = path.resolve("pdf");
 const OUTPUT = path.resolve("llm/ragVectors.json");
@@ -42,12 +37,29 @@ function chunkText(text: string): string[] {
   return chunks;
 }
 
+
 async function embedBatch(texts: string[]): Promise<number[][]> {
-  const res = await mistral.embeddings.create({
-    model: "mistral-embed",
-    inputs: texts,
-  });
-  return res.data.map((d) => d.embedding ?? []);
+  const vectors: number[][] = [];
+  
+
+  for (const text of texts) {
+    try {
+      const response = await fetch("http://localhost:11434/api/embeddings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "nomic-embed-text",
+          prompt: text,
+        }),
+      });
+      const data = await response.json();
+      vectors.push(data.embedding || []);
+    } catch (e) {
+      console.error("Erreur d'embedding sur un chunk :", e);
+      vectors.push([]); 
+    }
+  }
+  return vectors;
 }
 
 async function main() {
@@ -70,11 +82,13 @@ async function main() {
       }
       console.log(`  → ${chunks.length} chunks`);
 
-      for (let i = 0; i < chunks.length; i += 8) {
-        const batch = chunks.slice(i, i + 8);
+      for (let i = 0; i < chunks.length; i += 4) {
+        const batch = chunks.slice(i, i + 4);
         const vectors = await embedBatch(batch);
         for (let j = 0; j < batch.length; j++) {
-          entries.push({ source, text: batch[j], vector: vectors[j] });
+          if (vectors[j] && vectors[j].length > 0) {
+            entries.push({ source, text: batch[j], vector: vectors[j] });
+          }
         }
       }
     } catch (e) {

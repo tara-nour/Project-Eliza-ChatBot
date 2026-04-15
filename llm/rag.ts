@@ -46,7 +46,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
-export async function findRelevantChunks(query: string, topK = 5): Promise<string[]> {
+export async function findRelevantChunks(query: string, topK = 3): Promise<string[]> {
   if (!ragData.length) return [];
 
   const queryVec = await embedText(query);

@@ -1,16 +1,23 @@
-import { Mistral } from "@mistralai/mistralai";
 import { SYS_PROMPT } from "./prompt";
 
-const mistral = new Mistral({
-  apiKey: import.meta.env.VITE_MISTRAL_API_KEY || "",
-});
-
 export async function embedText(text: string): Promise<number[]> {
-  const res = await mistral.embeddings.create({
-    model: "mistral-embed",
-    inputs: [text],
-  });
-  return res.data[0].embedding;
+  try {
+    const response = await fetch("http://localhost:11434/api/embeddings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "nomic-embed-text", 
+        prompt: text,
+      }),
+    });
+
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.embedding;
+  } catch (error) {
+    console.error("Erreur Embedding Ollama :", error);
+    return [];
+  }
 }
 
 export async function askMistral(input: string, context?: string): Promise<string> {
@@ -23,10 +30,22 @@ export async function askMistral(input: string, context?: string): Promise<strin
     { role: "user", content: input },
   ];
 
-  const res = await mistral.chat.complete({
-    model: "mistral-small-2603",
-    messages,
-  });
-  const rep = res.choices[0].message?.content;
-  return typeof rep === "string" ? rep : "";
+  try {
+    const response = await fetch("http://localhost:11434/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gemma2:2b",
+        messages: messages,
+        stream: false, 
+      }),
+    });
+
+    if (!response.ok) return "Désolé, j'ai rencontré un problème.";
+    const data = await response.json();
+    return data.message?.content || "";
+  } catch (error) {
+    console.error("Erreur Chat Ollama :", error);
+    return "Je n'arrive pas à me connecter.";
+  }
 }
