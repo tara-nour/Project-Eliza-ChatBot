@@ -110,17 +110,17 @@
 
   /* Drop shadows for squircle elements (box-shadow is clipped; use filter instead) */
   .squircle-shadow-soft {
-    filter: drop-shadow(0 2px 15px hsl(217 91% 60% / 0.08)) drop-shadow(0 4px 6px hsl(217 91% 60% / 0.05));
+    filter: drop-shadow(0 2px 8px rgb(0 0 0 / 0.06)) drop-shadow(0 1px 3px rgb(0 0 0 / 0.04));
   }
   .squircle-shadow-card {
-    filter: drop-shadow(0 4px 25px hsl(217 91% 60% / 0.1)) drop-shadow(0 8px 10px hsl(217 91% 60% / 0.05));
+    filter: drop-shadow(0 2px 12px rgb(0 0 0 / 0.08)) drop-shadow(0 4px 6px rgb(0 0 0 / 0.04));
     transition: filter 0.3s ease;
   }
   .squircle-shadow-card:hover {
-    filter: drop-shadow(0 20px 60px hsl(217 91% 60% / 0.25));
+    filter: drop-shadow(0 8px 24px rgb(0 0 0 / 0.12)) drop-shadow(0 2px 6px rgb(0 0 0 / 0.06));
   }
   .squircle-shadow-float {
-    filter: drop-shadow(0 20px 60px hsl(217 91% 60% / 0.25));
+    filter: drop-shadow(0 8px 32px rgb(0 0 0 / 0.12)) drop-shadow(0 2px 8px rgb(0 0 0 / 0.06));
   }
 
   .gradient-primary {

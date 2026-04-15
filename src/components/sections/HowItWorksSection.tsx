@@ -33,18 +33,13 @@ export function HowItWorksSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {steps.map((step, i) => (
-            <div key={step.title} className="squircle-shadow-card">
-              <div className="relative bg-card squircle-sm p-8 text-center group">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 squircle gradient-primary flex items-center justify-center text-xs font-bold text-primary-foreground">
-                  {i + 1}
-                </div>
-                <div className="w-14 h-14 mx-auto mb-5 squircle bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <step.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+          {steps.map((step) => (
+            <div key={step.title} className="bg-card rounded-[18px] p-8 text-center shadow-sm hover:shadow-md transition-shadow duration-300 group">
+              <div className="w-14 h-14 mx-auto mb-5 squircle bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                <step.icon className="w-7 h-7 text-primary" />
               </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>

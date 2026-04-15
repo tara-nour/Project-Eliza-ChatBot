@@ -1,6 +1,15 @@
 import { SYS_PROMPT } from "./prompt";
 import { getPraticienContext } from "../src/data/praticiens";
+import { MODEL } from "./model";
 
+export const AVAILABLE_MODELS = ["phi4-mini", "llama3.2:3b", "mistral:7b", "llama3.1:8b"] as const;
+export type OllamaModel = (typeof AVAILABLE_MODELS)[number];
+
+let currentModel: string = MODEL || "phi4-mini";
+export const getCurrentModel = () => currentModel;
+export const setCurrentModel = (model: string) => { currentModel = model; };
+
+// Fetching text embedding from Ollama.
 export async function embedText(text: string): Promise<number[]> {
   try {
     const response = await fetch("http://localhost:11434/api/embeddings", {
@@ -26,7 +35,8 @@ interface HistoryMessage {
   content: string;
 }
 
-export async function askMistral(input: string, context?: string, history: HistoryMessage[] = []): Promise<string> {
+// Fetching model to Ollama localhost.
+export async function askOllama(input: string, context?: string, history: HistoryMessage[] = []): Promise<string> {
   const praticiens = getPraticienContext();
   const systemContent = `${SYS_PROMPT}\n\nPraticiens disponibles :\n${praticiens}${context ? `\n\nInformations médicales de référence :\n${context}` : ""}`;
 
@@ -42,7 +52,7 @@ export async function askMistral(input: string, context?: string, history: Histo
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         // model: "llama3.2:3b",
-        model: "phi4-mini",
+        model: currentModel,
         messages: messages,
         stream: false, 
       }),

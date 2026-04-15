@@ -1,6 +1,6 @@
 import { ChatMessage } from "@/types/chat";
 import { findBestMatch, findRelevantChunks } from "../../llm/rag";
-import { askMistral } from "../../llm/mistral";
+import { askOllama } from "../../llm/ollama";
 
 export async function mockBotReply(
   userMessage: string,
@@ -16,7 +16,7 @@ export async function mockBotReply(
     .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
 
   try {
-    content = await askMistral(userMessage, context, llmHistory);
+    content = await askOllama(userMessage, context, llmHistory);
   } catch (err: unknown) {
     const status = (err as { statusCode?: number })?.statusCode;
     if (status === 429) {

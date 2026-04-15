@@ -3,24 +3,36 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "Quels types de praticiens puis-je consulter ?",
-    a: "Notre réseau comprend des médecins généralistes, dermatologues, cardiologues, ORL, ophtalmologues et bien d'autres spécialistes. Le chatbot vous orientera vers le bon professionnel.",
+    q: "Comment prendre rendez-vous avec un praticien ?",
+    a: "Décrivez simplement vos symptômes dans le chat. Notre assistant identifie le bon professionnel et vous propose un créneau disponible en quelques secondes. Vous confirmez, c'est fait.",
   },
   {
-    q: "Mes données de santé sont-elles protégées ?",
-    a: "Absolument. Toutes vos données sont chiffrées et hébergées conformément au RGPD et aux normes HDS (Hébergement de Données de Santé). Nous ne partageons jamais vos informations sans votre consentement.",
+    q: "Le service est-il disponible la nuit et le week-end ?",
+    a: "Oui. L'assistant est disponible 24h/24 et 7j/7. Vous pouvez prendre rendez-vous à tout moment, même en dehors des horaires d'ouverture des cabinets.",
+  },
+  {
+    q: "Quels praticiens sont disponibles ?",
+    a: "Notre réseau comprend des médecins généralistes, cardiologues, neurologues, dentistes, ophtalmologues, rhumatologues, gynécologues et gastro-entérologues. Consultez la page \"Nos praticiens\" pour voir leurs disponibilités.",
+  },
+  {
+    q: "Le chatbot peut-il poser un diagnostic ?",
+    a: "Non. MédiRDV est un assistant d'orientation, pas un médecin. Il vous guide vers le bon professionnel de santé mais ne remplace en aucun cas une consultation médicale. En cas d'urgence, composez le 15.",
   },
   {
     q: "Puis-je annuler ou modifier un rendez-vous ?",
-    a: "Oui, vous pouvez annuler ou modifier votre rendez-vous directement via le chatbot, jusqu'à 2 heures avant le créneau prévu. Un SMS de confirmation vous sera envoyé.",
+    a: "Oui, vous pouvez annuler ou modifier votre rendez-vous directement via le chatbot jusqu'à 2 heures avant le créneau prévu.",
   },
   {
-    q: "Le service est-il gratuit ?",
-    a: "La prise de rendez-vous via notre assistant est entièrement gratuite. Seuls les actes médicaux sont facturés selon les tarifs conventionnels.",
+    q: "Mes données de santé sont-elles protégées ?",
+    a: "Vos données sont traitées conformément au RGPD. MédiRDV fonctionne en local : les échanges ne transitent pas par des serveurs cloud tiers. Vos informations ne sont jamais revendues ni partagées sans votre consentement.",
   },
   {
-    q: "Comment fonctionne le chatbot ?",
-    a: "Notre chatbot utilise l'intelligence artificielle pour comprendre votre besoin et vous guider. Il est modulable et évolue constamment pour vous offrir la meilleure expérience possible.",
+    q: "La prise de rendez-vous est-elle gratuite ?",
+    a: "La prise de rendez-vous via notre assistant est entièrement gratuite. Seuls les actes médicaux sont facturés selon les tarifs conventionnels de chaque praticien.",
+  },
+  {
+    q: "Combien de temps prend la prise de rendez-vous ?",
+    a: "En moyenne moins d'une minute. Décrivez votre besoin, confirmez le créneau proposé, c'est tout. Vous recevez une confirmation immédiate.",
   },
 ];
 

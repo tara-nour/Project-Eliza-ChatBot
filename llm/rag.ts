@@ -1,4 +1,4 @@
-import { embedText } from "./mistral";
+import { embedText } from "./ollama";
 import ragData from "./ragVectors.json";
 import intentData from "./ragData.json";
 
