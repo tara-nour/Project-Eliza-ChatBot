@@ -3,7 +3,6 @@ import discord
 from discord import app_commands
 from dotenv import load_dotenv
 import os
-
 from rdv import setup_rdv
 
 load_dotenv()
@@ -13,10 +12,8 @@ intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-#Enregistrement des commandes 
+#commandes enregistrement
 setup_rdv(tree)
-
-
 
 #Commande /aide 
 @tree.command(name="aide", description="Afficher l'aide / Show help")
@@ -43,13 +40,10 @@ async def aide(interaction: discord.Interaction):
     embed.set_footer(text="Cabinet Médical • Powered by médiRDV")
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
-
-
 @client.event
 async def on_ready():
     await tree.sync()
     print(f"Bot connecté en tant que {client.user}")
     print(f" Slash commands synchronisées.")
-
 
 client.run(TOKEN)
