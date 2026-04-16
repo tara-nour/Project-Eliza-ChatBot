@@ -14,12 +14,12 @@ export function ChatBubble({ message, onQuickReply }: ChatBubbleProps) {
     <div
       className={`flex gap-3 animate-fade-in-up ${isBot ? "justify-start" : "justify-end"}`}
     >
-      {isBot && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full gradient-primary flex items-center justify-center">
-          <Bot className="w-4 h-4 text-primary-foreground" />
-        </div>
-      )}
-      <div className={`max-w-[75%] space-y-2`}>
+          {isBot && (
+            <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden shadow-soft">
+              <img src="src/assets/chat.png" alt="Logo" className="w-full h-full object-cover" />
+            </div>
+          )}
+        <div className={`max-w-[75%] space-y-2`}>
         <div
           className={`px-4 py-3 rounded-2xl text-sm leading-relaxed ${
             isBot

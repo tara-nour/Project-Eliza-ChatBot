@@ -9,11 +9,15 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border/50">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xl">🩺</span>
-          <span className="font-bold text-foreground text-lg"><a href = "/">MédiRDV</a></span>
+          <a href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 overflow-hidden rounded-lg">
+              <img 
+                src="src/assets/chat.png" alt="Logo MédiRDV" className="w-full h-full object-contain"/>
+            </div>
+            <span className="font-bold text-foreground text-lg">MédiRDV</span>
+          </a>
         </div>
-
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+                <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#how-it-works" className="hover:text-foreground transition-colors">Comment ça marche</a>
           <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
           <Link to="/praticiens" className="hover:text-foreground transition-colors">Nos praticiens</Link>
