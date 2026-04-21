@@ -4,10 +4,9 @@ import ReactMarkdown from "react-markdown";
 
 interface ChatBubbleProps {
   message: ChatMessage;
-  onQuickReply?: (reply: string) => void;
 }
 
-export function ChatBubble({ message, onQuickReply }: ChatBubbleProps) {
+export function ChatBubble({ message }: ChatBubbleProps) {
   const isBot = message.role === "assistant";
 
   return (
@@ -35,19 +34,6 @@ export function ChatBubble({ message, onQuickReply }: ChatBubbleProps) {
             message.content
           )}
         </div>
-        {message.quickReplies && message.quickReplies.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {message.quickReplies.map((reply) => (
-              <button
-                key={reply}
-                onClick={() => onQuickReply?.(reply)}
-                className="px-3 py-1.5 text-xs font-medium rounded-full border border-primary/20 text-primary bg-accent hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-              >
-                {reply}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
       {!isBot && (
         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center">

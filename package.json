@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "ingest": "tsx llm/ingestPdfs.ts"
+    "ingest": "tsx llm/ingestPdfs.ts",
+    "benchmark": "tsx llm/benchmark.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

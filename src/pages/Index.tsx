@@ -12,7 +12,6 @@ const chatConfig: ChatConfig = {
   welcomeMessage:
     "Bonjour ! 👋 Je suis votre assistant de prise de rendez-vous médical. Comment puis-je vous aider aujourd'hui ?",
   placeholder: "Écrivez votre message…",
-  quickReplies: ["Prendre un RDV", "Annuler un RDV", "Informations pratiques"],
   onSendMessage: mockBotReply,
 };
 

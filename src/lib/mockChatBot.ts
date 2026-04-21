@@ -1,5 +1,5 @@
 import { ChatMessage } from "@/types/chat";
-import { findBestMatch, findRelevantChunks } from "../../llm/rag";
+import { findRelevantChunks } from "../../llm/rag";
 import { askOllama } from "../../llm/ollama";
 
 export async function mockBotReply(
@@ -26,13 +26,10 @@ export async function mockBotReply(
     }
   }
 
-  const bestMatch = findBestMatch(userMessage);
-
   return {
     id: crypto.randomUUID(),
     role: "assistant",
     content,
     timestamp: new Date(),
-    quickReplies: bestMatch?.questions,
   };
 }

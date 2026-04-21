@@ -58,7 +58,7 @@ export function ChatWindow({ config, onClose, className = "" }: ChatWindowProps)
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[300px] max-h-[450px]">
         {messages.map((msg) => (
-          <ChatBubble key={msg.id} message={msg} onQuickReply={sendMessage} />
+          <ChatBubble key={msg.id} message={msg} />
         ))}
         {isLoading && (
           <div className="flex gap-3 items-start">

@@ -8,7 +8,6 @@ export function useChat(config: ChatConfig) {
       role: "assistant",
       content: config.welcomeMessage,
       timestamp: new Date(),
-      quickReplies: config.quickReplies,
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +51,6 @@ export function useChat(config: ChatConfig) {
         role: "assistant",
         content: config.welcomeMessage,
         timestamp: new Date(),
-        quickReplies: config.quickReplies,
       },
     ]);
   }, [config]);

@@ -47,10 +47,11 @@ function cosineSimilarity(a: number[], b: number[]): number {
 }
 
 export async function findRelevantChunks(query: string, topK = 3): Promise<string[]> {
-  if (!ragData.length) return [];
+  const data = ragData as { source: string; text: string; vector: number[] }[];
+  if (!data.length) return [];
 
   const queryVec = await embedText(query);
-  const scored = (ragData as { source: string; text: string; vector: number[] }[]).map(
+  const scored = data.map(
     (entry) => ({ text: entry.text, score: cosineSimilarity(queryVec, entry.vector) })
   );
   scored.sort((a, b) => b.score - a.score);
