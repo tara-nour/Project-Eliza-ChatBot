@@ -34,8 +34,10 @@ export function ChatWindow({ config, onClose, className = "" }: ChatWindowProps)
       {/* Header */}
       <div className="gradient-primary px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-            <span className="text-lg">🩺</span>
+          <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+            <img 
+              src="src/assets/chat.png" alt="Logo" className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-primary-foreground">{config.botName}</h3>
@@ -60,21 +62,25 @@ export function ChatWindow({ config, onClose, className = "" }: ChatWindowProps)
         {messages.map((msg) => (
           <ChatBubble key={msg.id} message={msg} />
         ))}
-        {isLoading && (
-          <div className="flex gap-3 items-start">
-            <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-xs">🩺</span>
-            </div>
-            <div className="bg-card shadow-soft rounded-2xl rounded-tl-md px-4 py-3">
-              <div className="flex gap-1.5">
-                <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "0ms" }} />
-                <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "200ms" }} />
-                <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "400ms" }} />
+       {isLoading && (
+              <div className="flex gap-3 items-start">
+                <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                  <img 
+                    src="src/assets/chat.png" 
+                    alt="Logo" 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <div className="bg-card shadow-soft rounded-2xl rounded-tl-md px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "0ms" }} />
+                    <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "200ms" }} />
+                    <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse-soft" style={{ animationDelay: "400ms" }} />
+                  </div>
+                </div>
               </div>
+            )}
             </div>
-          </div>
-        )}
-      </div>
 
       {/* Model selector */}
       <div className="relative px-4 py-2 border-t border-border bg-card flex items-center gap-2">
