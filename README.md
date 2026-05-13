@@ -37,6 +37,10 @@ ollama pull nomic-embed-text
 ```bash
 npm run ingest
 ```
+## Configuration
+Create a .env file at the root of the project:
+envVITE_MISTRAL_API_KEY=your_mistral_api_key_here
+MISTRAL_API_KEY=your_mistral_api_key_here
 
 The file `llm/ragVectors.json` will be automatically generated.
 
